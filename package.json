@@ -1,0 +1,23 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "migrate": "drizzle-kit push:sqlite"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/node": "^18.16.19",
+    "better-sqlite3": "^8.4.0",
+    "drizzle-kit": "^0.19.3",
+    "drizzle-orm": "^0.27.0",
+    "nuxt": "^3.6.2"
+  },
+  "dependencies": {
+    "@nuxthq/ui": "^2.5.0"
+  }
+}
