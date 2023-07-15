@@ -1,5 +1,5 @@
-import { users } from "~/server/utils/schemas/users.schema";
+import { users } from '~/server/utils/schemas/users.schema'
 
-export default defineEventHandler(async (event) => {
-  return db.select().from(users).all();
-});
+export default defineEventHandler(async () => {
+  return db.select().from(users).all()
+})

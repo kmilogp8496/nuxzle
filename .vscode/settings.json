@@ -1,5 +1,11 @@
 {
-    "editor.formatOnSave": false,
-    "prettier.enable": false,
-    "unocss.root": ["./.nuxt"]
+  "editor.formatOnSave": false,
+  "prettier.enable": false,
+  "unocss.root": [
+    "./.nuxt"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false
+  }
 }

@@ -6,5 +6,5 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
-  modules: ["@nuxthq/ui"],
-});
+  modules: ['@nuxthq/ui', '@nuxtjs/eslint-module'],
+})

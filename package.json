@@ -7,17 +7,21 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "migrate": "drizzle-kit push:sqlite"
+    "migrate": "drizzle-kit push:sqlite",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "dependencies": {
+    "@nuxthq/ui": "^2.5.0"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.39.7",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@types/node": "^18.16.19",
     "better-sqlite3": "^8.4.0",
     "drizzle-kit": "^0.19.3",
     "drizzle-orm": "^0.27.0",
     "nuxt": "^3.6.2"
-  },
-  "dependencies": {
-    "@nuxthq/ui": "^2.5.0"
   }
 }
