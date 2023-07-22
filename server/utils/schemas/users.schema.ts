@@ -10,9 +10,10 @@ import { sql } from 'drizzle-orm'
 export const users = sqliteTable(
   'users',
   {
-    id: integer('id').primaryKey(),
+    id: integer('id').primaryKey({ autoIncrement: true }),
     name: text('name', { length: 256 }),
     email: text('email', { length: 256 }).notNull(),
+    password: text('password', { length: 256 }).notNull(),
     created_at: text('created_at', { length: 256 })
       .notNull()
       .default(sql`CURRENT_TIMESTAMP`),
