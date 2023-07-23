@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { registerUser } from '~/api/auth.api'
-
-useHead({
-  title: 'Registrarse',
-})
+import { loginUser } from '~/api/auth.api'
 
 const formData = ref({
   email: '',
   password: '',
 })
 
-const toast = useToast()
+useHead({
+  title: 'Iniciar sesión',
+})
+
 const loading = ref(false)
-const { error, execute } = registerUser(formData)
+const { error, execute } = loginUser(formData)
 
 async function onSubmit() {
   loading.value = true
@@ -24,10 +23,8 @@ async function onSubmit() {
     })
   }
   else {
-    toast.add({
-      title: 'Éxito',
-      description: 'Usuario registrado',
-      color: 'green',
+    displaySuccessNotification({
+      description: 'Usuario logueado. Bienvenido!',
     })
     navigateTo({
       name: 'index',
@@ -37,11 +34,11 @@ async function onSubmit() {
 </script>
 
 <template>
-  <Form title="Registrarse" class="max-w-md space-y-4 mx-auto" @submit="onSubmit">
+  <Form title="Iniciar sesión" class="max-w-md mx-auto space-y-4" @submit="onSubmit">
     <FormInput v-model="formData.email" label="Email" :rules="[required, email]" />
     <FormInput v-model="formData.password" label="Contraseña" :rules="required" type="password" />
     <UButton :loading="loading" type="submit">
-      Registrarse
+      Iniciar sesión
     </UButton>
   </Form>
 </template>

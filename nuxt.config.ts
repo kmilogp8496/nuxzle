@@ -18,18 +18,11 @@ export default defineNuxtConfig({
   modules: [
     '@nuxthq/ui',
     '@nuxtjs/eslint-module',
-    '@vee-validate/nuxt',
   ],
 
-  veeValidate: {
-    autoImports: true,
-    componentNames: {
-      Form: 'VeeForm',
-      Field: 'VeeField',
-      FieldArray: 'VeeFieldArray',
-      ErrorMessage: 'VeeErrorMessage',
-    },
+  eslint: {
+    lintOnStart: false,
   },
 
-  plugins: [],
+  plugins: ['~/plugins/layout.ts'],
 })

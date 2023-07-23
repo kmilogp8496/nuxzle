@@ -5,6 +5,8 @@ defineOptions({
   name: 'Form',
 })
 
+defineProps<{ title?: string }>()
+
 const emit = defineEmits<{
   (event: 'submit'): void
 }>()
@@ -40,6 +42,11 @@ provide('form', {
 
 <template>
   <form @submit.prevent.stop="handleSubmit">
+    <slot name="title">
+      <h1 v-if="title" class="text-primary-500 text-xl">
+        {{ title }}
+      </h1>
+    </slot>
     <slot />
   </form>
 </template>
