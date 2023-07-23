@@ -19,11 +19,13 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@types/better-sqlite3": "^7.6.4",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^18.16.19",
     "better-sqlite3": "^8.4.0",
     "drizzle-kit": "^0.19.3",
     "drizzle-orm": "^0.27.0",
     "h3-typebox": "^0.6.0",
+    "jsonwebtoken": "^9.0.1",
     "nuxt": "^3.6.5"
   }
 }

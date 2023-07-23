@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    jwtSecret: '',
+    authCookieName: '',
+  },
+
   vite: {
     vue: {
       script: {
