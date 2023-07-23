@@ -50,6 +50,8 @@ function onKeyDown(event: KeyboardEvent) {
 
 function validate() {
   canValidate.value = true
+  dirty.value = true
+
   return computedError.value === ''
 }
 

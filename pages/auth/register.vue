@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { registerUser } from 'api/auth.api'
+import { registerUser } from '~/api/auth.api'
 
 const data = ref({
-  email: '',
+  email: 'asdasd',
   password: '',
 })
 
 function onSubmit() {
   const response = registerUser(data.value)
-  console.log(response.data.value)
 }
 </script>
 
@@ -23,7 +22,6 @@ function onSubmit() {
       <UButton type="submit" class="mt-4">
         Registrarse
       </UButton>
-      </DForm>
-    </form>
+    </Form>
   </UContainer>
 </template>

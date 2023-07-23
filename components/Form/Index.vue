@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { Field } from './interface'
 
+defineOptions({
+  name: 'Form',
+})
+
 const emit = defineEmits<{
   (event: 'submit'): void
 }>()
@@ -8,11 +12,8 @@ const emit = defineEmits<{
 const fields = ref<Field[]>([])
 
 async function validate() {
-  for (const field of fields.value) {
-    const isValid = await field.validate()
-    if (!isValid)
-      return false
-  }
+  const responses = await Promise.all(fields.value.map(field => field.validate()))
+  return !responses.includes(false)
 }
 
 function registerField(field: Field) {

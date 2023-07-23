@@ -3,7 +3,7 @@ export type Rule = (value: string, label: string) => boolean | string
 type InputValue = string | number
 
 export interface Field {
-  validate: () => boolean | Promise<boolean>
+  validate: () => boolean
 }
 
 export interface InjectedForm {
