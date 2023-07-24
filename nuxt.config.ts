@@ -29,5 +29,5 @@ export default defineNuxtConfig({
     lintOnStart: false,
   },
 
-  plugins: ['~/plugins/layout.ts'],
+  plugins: ['~/plugins/auth.ts'],
 })

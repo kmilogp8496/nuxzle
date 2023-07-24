@@ -4,17 +4,12 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const token = getCookie(event, config.authCookieName)
 
-  if (!token) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Unauthorized',
-    })
-  }
+  if (token) {
+    try {
+      const user = jwt.verify(token, config.jwtSecret)
 
-  try {
-    const user = jwt.verify(token, config.jwtSecret)
-
-    event.context.user = user
+      event.context.user = user
+    }
+    catch {}
   }
-  catch {}
 })

@@ -1,8 +1,7 @@
 import { Type, validateBody } from 'h3-typebox'
 import { and, eq } from 'drizzle-orm'
-
-// @ts-expect-error Synthetic default export
 import jwt from 'jsonwebtoken'
+import { users } from '../../utils/db/schemas/users.schema'
 
 export default defineEventHandler(async (event) => {
   const body = await validateBody(event, Type.Object({
