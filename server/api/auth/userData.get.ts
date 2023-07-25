@@ -1,12 +1,14 @@
 import { eq } from 'drizzle-orm'
-import { generateToken } from '../../utils/jwt'
-import { setAuthCookie } from '../../utils/cookie'
-import { users } from '../../utils/db/schemas/users.schema'
+import { generateToken } from '~/server/utils/jwt'
+import { setAuthCookie } from '~/server/utils/cookie'
+import { users } from '~/server/utils/db/schemas/users.schema'
 
 export default defineEventHandler(async (event) => {
   const userToken = protectRoute(event)
 
   const user = db.select().from(users).where(eq(users.id, userToken.id)).get()
+
+  console.log('user', user ?? 'not found user')
 
   if (!user) {
     throw createError({

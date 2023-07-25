@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { loginUser } from '~/api/auth.api'
 
+definePageMeta({
+  middleware: [
+    function () {
+      const nuxtApp = useNuxtApp()
+      if (nuxtApp.$auth.isLogged.value) {
+        return navigateTo({
+          name: 'index',
+        })
+      }
+    },
+  ],
+})
+
 const formData = ref({
   email: '',
   password: '',

@@ -1,4 +1,4 @@
-import type { InsertUser } from '~/server/utils/schemas/users.schema'
+import type { InsertUser } from '~/server/utils/db/schemas/users.schema'
 
 interface LoginData {
   email: string
@@ -6,7 +6,7 @@ interface LoginData {
 }
 
 export function registerUser(body: Ref<InsertUser>) {
-  return useFetch('/api/auth/register', {
+  return apiClient('/api/auth/register', {
     method: 'POST',
     body,
     watch: false,
@@ -15,7 +15,7 @@ export function registerUser(body: Ref<InsertUser>) {
 }
 
 export function loginUser(body: Ref<LoginData>) {
-  return useFetch('/api/auth/login', {
+  return apiClient('/api/auth/login', {
     method: 'POST',
     body,
     watch: false,

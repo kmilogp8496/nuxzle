@@ -1,7 +1,8 @@
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  const nuxtApp = useNuxtApp()
-  if (!(process.client && nuxtApp.isHydrating && nuxtApp.payload.serverRendered))
-    await nuxtApp.$auth.getUserData()
-
-  console.log('running')
+export default defineNuxtRouteMiddleware(async () => {
+  // eslint-disable-next-line n/prefer-global/process
+  if (process.server) {
+    const nuxtApp = useNuxtApp()
+    const authStore = useAuthStore(nuxtApp.$pinia)
+    await authStore.getUserData()
+  }
 })

@@ -22,7 +22,8 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxthq/ui',
-    '@nuxtjs/eslint-module',
+    '@pinia/nuxt',
+    // '@nuxtjs/eslint-module',
   ],
 
   eslint: {
@@ -30,4 +31,17 @@ export default defineNuxtConfig({
   },
 
   plugins: ['~/plugins/auth.ts'],
+
+  imports: {
+    dirs: [
+      'api',
+      'stores',
+    ],
+  },
+
+  pinia: {
+    autoImports: [
+      'defineStore',
+    ],
+  },
 })

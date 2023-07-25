@@ -1,6 +1,6 @@
 import type { TokenUser } from '~/server/utils/jwt'
 
-export default defineNuxtPlugin(() => {
+export const useAuthStore = defineStore('authStore', () => {
   const loggedUser = ref<TokenUser | null>(null)
 
   async function getUserData() {
@@ -21,13 +21,9 @@ export default defineNuxtPlugin(() => {
   }
 
   return {
-    provide: {
-      auth: {
-        user: loggedUser,
-        isLogged,
-        getUserData,
-        logout,
-      },
-    },
+    user: loggedUser,
+    isLogged,
+    getUserData,
+    logout,
   }
 })
