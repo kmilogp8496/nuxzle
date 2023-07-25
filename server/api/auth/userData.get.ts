@@ -8,8 +8,6 @@ export default defineEventHandler(async (event) => {
 
   const user = db.select().from(users).where(eq(users.id, userToken.id)).get()
 
-  console.log('user', user ?? 'not found user')
-
   if (!user) {
     throw createError({
       statusCode: 404,

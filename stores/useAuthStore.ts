@@ -1,5 +1,7 @@
 import type { TokenUser } from '~/server/utils/jwt'
 
+// Since hydration has some issues yet, the return object must not contain a computed or readonly object.
+// The return data must be the same as declared
 export const useAuthStore = defineStore('authStore', () => {
   const loggedUser = ref<TokenUser | null>(null)
 
