@@ -18,7 +18,8 @@ export const useAuthStore = defineStore('authStore', () => {
     return !!loggedUser.value
   })
 
-  function logout() {
+  async function logout() {
+    await apiClient('/api/auth/logout')
     loggedUser.value = null
   }
 

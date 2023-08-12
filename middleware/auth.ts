@@ -1,5 +1,7 @@
-export default defineNuxtRouteMiddleware(() => {
+export default defineNuxtRouteMiddleware((to) => {
   const nuxtApp = useNuxtApp()
-  if (!nuxtApp.$auth.isLogged.value)
-    return abortNavigation()
+  const authStore = useAuthStore(nuxtApp.$pinia)
+
+  if (!authStore.isLogged)
+    return navigateTo({ name: 'auth-login', query: { redirect: to.fullPath } })
 })

@@ -3,7 +3,7 @@ export const apiClient: typeof useFetch = (request, options) => {
     onResponseError: (error) => {
       if (error.response?.status === 401) {
         const nuxtApp = useNuxtApp()
-        nuxtApp.$auth.logout()
+        useAuthStore(nuxtApp.$pinia).logout()
       }
     },
     ...options,

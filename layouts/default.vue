@@ -11,8 +11,11 @@ async function tryLogout() {
 </script>
 
 <template>
-  <div>
-    <UContainer class="py-4 flex items-center justify-end gap-4">
+  <div class="h-screen flex flex-col">
+    <UContainer class="w-full py-4 flex items-center gap-4">
+      <UButton class="me-auto" icon="i-heroicons-home" variant="ghost" :to="{ name: 'index' }">
+        Inicio
+      </UButton>
       <template v-if="!authStore.isLogged">
         <UButton icon="i-heroicons-arrow-right-on-rectangle" variant="ghost" :to="{ name: 'auth-register' }">
           Registrarse
@@ -26,7 +29,7 @@ async function tryLogout() {
       </UButton>
     </UContainer>
 
-    <UContainer>
+    <UContainer class="flex-grow overflow-y-auto w-full">
       <slot />
     </UContainer>
   </div>

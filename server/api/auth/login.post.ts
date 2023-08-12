@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Invalid credentials',
+      message: 'Invalid credentials',
     })
   }
 

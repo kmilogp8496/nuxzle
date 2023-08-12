@@ -5,11 +5,17 @@ definePageMeta({
   middleware: [
     function () {
       const nuxtApp = useNuxtApp()
-      if (nuxtApp.$auth.isLogged.value) {
-        return navigateTo({
-          name: 'index',
-        })
-      }
+      const authStore = useAuthStore(nuxtApp.$pinia)
+      if (!authStore.isLogged)
+        return
+
+      const redirect = nuxtApp.$router.currentRoute.value.query.redirect
+      if (redirect && typeof redirect === 'string')
+        return navigateTo(redirect)
+
+      return navigateTo({
+        name: 'index',
+      })
     },
   ],
 })
@@ -25,6 +31,7 @@ useHead({
 
 const loading = ref(false)
 const { error, execute } = loginUser(formData)
+const route = useRoute()
 
 async function onSubmit() {
   loading.value = true
@@ -32,16 +39,24 @@ async function onSubmit() {
   loading.value = false
   if (error.value) {
     displayErrorNotification({
-      description: error.value.statusMessage,
+      description: error.value.data.message,
     })
   }
   else {
     displaySuccessNotification({
-      description: 'Usuario logueado. Bienvenido!',
+      title: 'Inicio de sesión exitoso',
+      description: `Bienvenido! ${formData.value.email}`,
     })
-    navigateTo({
-      name: 'index',
-    })
+
+    await useAuthStore().getUserData()
+
+    const redirect = route.query.redirect
+
+    if (redirect && typeof redirect === 'string')
+      navigateTo(redirect)
+
+    else
+      navigateTo({ name: 'index' })
   }
 }
 </script>

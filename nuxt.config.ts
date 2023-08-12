@@ -30,8 +30,6 @@ export default defineNuxtConfig({
     lintOnStart: false,
   },
 
-  plugins: ['~/plugins/auth.ts'],
-
   imports: {
     dirs: [
       'api',

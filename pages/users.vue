@@ -31,7 +31,7 @@ async function onSubmit() {
   if (error.value) {
     useToast().add({
       title: 'Error',
-      description: error.value.message,
+      description: error.value.data.message,
     })
 
     pending.value = false
@@ -44,7 +44,6 @@ async function onSubmit() {
 
 <template>
   <UContainer class="space-y-4">
-    {{ $auth.user.value }}
     <h1 class="text-primary-500 text-xl">
       Users
     </h1>

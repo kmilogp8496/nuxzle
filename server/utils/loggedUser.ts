@@ -16,7 +16,7 @@ export function protectRoute(event: H3Event) {
   if (!loggedUser) {
     throw createError({
       statusCode: 401,
-      statusMessage: 'Unauthorized',
+      message: 'Unauthorized',
     })
   }
 

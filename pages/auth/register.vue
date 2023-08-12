@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { registerUser } from '~/api/auth.api'
-
 useHead({
   title: 'Registrarse',
 })
@@ -14,21 +12,32 @@ const toast = useToast()
 const loading = ref(false)
 const { error, execute } = registerUser(formData)
 
+const route = useRoute()
+const authStore = useAuthStore()
+
 async function onSubmit() {
   loading.value = true
   await execute()
   loading.value = false
   if (error.value) {
     displayErrorNotification({
-      description: error.value.statusMessage,
+      description: error.value.data.message,
     })
   }
   else {
-    toast.add({
+    displaySuccessNotification({
       title: 'Éxito',
       description: 'Usuario registrado',
       color: 'green',
     })
+
+    await loginUser(formData)
+
+    await authStore.getUserData()
+
+    if (route.query.redirect && typeof route.query.redirect === 'string')
+      return navigateTo(route.query.redirect)
+
     navigateTo({
       name: 'index',
     })
