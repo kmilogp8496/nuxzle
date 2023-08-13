@@ -1,4 +1,4 @@
-import type { InsertUser } from '~/server/utils/db/schemas/users.schema'
+import type { InsertUser } from '~/server/db/schemas/users.schema'
 
 interface LoginData {
   email: string

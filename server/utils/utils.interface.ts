@@ -1,3 +1,3 @@
-import type { validateQuery } from 'h3-typebox'
+import type { useValidatedQuery } from 'h3-zod'
 
-export type QueryType<T extends Parameters<typeof validateQuery>[1]> = ReturnType<typeof validateQuery<T>>
+export type QueryType<T extends Parameters<typeof useValidatedQuery>[1]> = Awaited<ReturnType<typeof useValidatedQuery<T>>>

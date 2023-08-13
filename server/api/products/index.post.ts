@@ -1,10 +1,10 @@
-import { Type, validateBody } from 'h3-typebox'
-import { insertProduct } from '~/server/utils/db/schemas/products.schema'
+import { useValidatedBody, z } from 'h3-zod'
+import { insertProduct } from '~/server/db/schemas/products.schema'
 
 export default defineEventHandler(async (event) => {
   const user = protectRoute(event)
-  const body = await validateBody(event, Type.Object({
-    name: Type.String(),
+  const body = await useValidatedBody(event, z.object({
+    name: z.string(),
   }))
 
   return insertProduct({

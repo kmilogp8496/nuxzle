@@ -1,6 +1,7 @@
 {
     "extends": "@antfu",
     "rules": {
-        "vue/no-reserved-component-names": "off"
+        "vue/no-reserved-component-names": "off",
+        "n/prefer-global/process": "off"
     }
 }

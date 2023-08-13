@@ -5,11 +5,10 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
-import { createInsertSchema, createSelectSchema } from 'drizzle-typebox'
-import type { Static } from '@sinclair/typebox'
-import { Type } from '@sinclair/typebox'
-import { Value } from '@sinclair/typebox/value'
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { SqliteError } from 'better-sqlite3'
+import { z } from 'zod'
+import { db } from '../db.drizzle'
 
 export const users = sqliteTable(
   'users',
@@ -31,16 +30,16 @@ export const users = sqliteTable(
 
 // Schema for inserting a user - can be used to validate API requests
 const insertUserSchema = createInsertSchema(users, {
-  password: Type.String({ minLength: 8 }),
+  password: z.string().min(8),
 })
 
 const selectUserSchema = createSelectSchema(users)
 
-export type InsertUser = Static<typeof insertUserSchema>
-export type User = Static<typeof selectUserSchema>
+export type InsertUser = z.infer<typeof insertUserSchema>
+export type User = z.infer<typeof selectUserSchema>
 
 export function insertUser(user: InsertUser) {
-  if (!Value.Check(insertUserSchema, user)) {
+  if (!insertUserSchema.parse(user)) {
     throw createError({
       statusCode: 400,
       message: 'La información del usuario es inválida',

@@ -8,7 +8,6 @@ const formData = ref({
   password: '',
 })
 
-const toast = useToast()
 const loading = ref(false)
 const { error, execute } = registerUser(formData)
 

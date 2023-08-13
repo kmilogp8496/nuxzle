@@ -3,12 +3,11 @@ import {
   sqliteTable,
   text,
   uniqueIndex,
-
 } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
-import { createInsertSchema, createSelectSchema } from 'drizzle-typebox'
-import type { Static } from '@sinclair/typebox'
-import { Value } from '@sinclair/typebox/value'
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
+import type { z } from 'zod'
+import { db } from '../db.drizzle'
 import { users } from './users.schema'
 
 export const products = sqliteTable(
@@ -32,11 +31,11 @@ const insertProductSchema = createInsertSchema(products)
 
 const selectProductSchema = createSelectSchema(products)
 
-export type InsertProduct = Static<typeof insertProductSchema>
-export type Product = Static<typeof selectProductSchema>
+export type InsertProduct = z.infer<typeof insertProductSchema>
+export type Product = z.infer<typeof selectProductSchema>
 
 export function insertProduct(product: InsertProduct) {
-  if (!Value.Check(insertProductSchema, product)) {
+  if (!insertProductSchema.parse(product)) {
     throw createError({
       statusCode: 400,
       message: 'La información del producto es inválida',

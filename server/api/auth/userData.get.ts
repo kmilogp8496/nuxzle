@@ -1,7 +1,8 @@
 import { eq } from 'drizzle-orm'
 import { generateToken } from '~/server/utils/jwt'
 import { setAuthCookie } from '~/server/utils/cookie'
-import { users } from '~/server/utils/db/schemas/users.schema'
+import { users } from '~/server/db/schemas/users.schema'
+import { db } from '~/server/db/db.drizzle'
 
 export default defineEventHandler(async (event) => {
   const userToken = protectRoute(event)

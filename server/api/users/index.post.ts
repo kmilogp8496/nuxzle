@@ -1,4 +1,5 @@
-import { users } from '../../utils/db/schemas/users.schema'
+import { db } from '../../db/db.drizzle'
+import { users } from '~/server/db/schemas/users.schema'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)

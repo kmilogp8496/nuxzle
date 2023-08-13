@@ -1,5 +1,5 @@
 import type { ProductQuery } from 'server/api/products/index.get'
-import type { InsertProduct } from 'server/utils/db/schemas/products.schema'
+import type { InsertProduct } from 'server/db/schemas/products.schema'
 
 export function getProducts(params?: ProductQuery) {
   return apiClient('/api/products', {

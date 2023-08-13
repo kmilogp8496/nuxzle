@@ -1,3 +1,7 @@
+import { createResolver } from 'nuxt/kit'
+
+const { resolve } = createResolver(import.meta.url)
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -5,6 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     jwtSecret: '',
     authCookieName: '',
+    dbPath: resolve(process.env.NUXT_SQLITE_PATH ?? 'server/db'),
   },
 
   vite: {
@@ -23,7 +28,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxthq/ui',
     '@pinia/nuxt',
-    // '@nuxtjs/eslint-module',
+    '@nuxtjs/eslint-module',
   ],
 
   eslint: {

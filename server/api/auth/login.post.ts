@@ -1,13 +1,14 @@
-import { Type, validateBody } from 'h3-typebox'
 import { and, eq } from 'drizzle-orm'
 import jwt from 'jsonwebtoken'
-import { users } from '../../utils/db/schemas/users.schema'
+import { useValidatedBody, z } from 'h3-zod'
+import { users } from '~/server/db/schemas/users.schema'
+import { db } from '~/server/db/db.drizzle'
 
 export default defineEventHandler(async (event) => {
-  const body = await validateBody(event, Type.Object({
-    email: Type.String({ format: 'email' }),
-    password: Type.String({ minLength: 8 }),
-  }), { includeAjvFormats: true })
+  const body = await useValidatedBody(event, z.object({
+    email: z.string().email(),
+    password: z.string().min(8),
+  }))
 
   const user = db.select().from(users).where(
     and(
