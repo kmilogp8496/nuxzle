@@ -45,10 +45,10 @@ devDependencies:
     version: 0.28.2(@types/better-sqlite3@7.6.4)(better-sqlite3@8.5.0)
   drizzle-typebox:
     specifier: ^0.1.0
-    version: 0.1.0(@sinclair/typebox@0.27.8)(drizzle-orm@0.28.2)
+    version: 0.1.0(@sinclair/typebox@0.31.0)(drizzle-orm@0.28.2)
   h3-typebox:
-    specifier: ^0.6.0
-    version: 0.6.0
+    specifier: npm:@kmilogp8496/h3-typebox@^0.7.0
+    version: /@kmilogp8496/h3-typebox@0.7.0
   jsonwebtoken:
     specifier: ^9.0.1
     version: 9.0.1
@@ -1087,6 +1087,16 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
+  /@kmilogp8496/h3-typebox@0.7.0:
+    resolution: {integrity: sha512-ljBSnhw7r461R3fz6Ldf/7mF24dJiHdTxJuBnSUo5OPQOaldfrfrC4b/YmCKTyvKJDqSJ7THklM57QLzD1SgnQ==}
+    dependencies:
+      '@apideck/better-ajv-errors': 0.3.6(ajv@8.12.0)
+      '@sinclair/typebox': 0.31.0
+      ajv: 8.12.0
+      ajv-formats: 2.1.1(ajv@8.12.0)
+      h3: 1.7.1
+    dev: true
+
   /@koa/router@9.4.0:
     resolution: {integrity: sha512-dOOXgzqaDoHu5qqMEPLKEgLz5CeIA7q8+1W62mCvFVCOqeC71UoTGJ4u1xUSOpIl2J1x2pqrNULkFteUeZW3/A==}
     engines: {node: '>= 8.0.0'}
@@ -1766,12 +1776,12 @@ packages:
       - supports-color
     dev: true
 
-  /@sinclair/typebox@0.25.24:
-    resolution: {integrity: sha512-XJfwUVUKDHF5ugKwIcxEgc9k8b7HbznCp6eUfWgu710hMPNIO4aw4/zB5RogDQz8nd6gyCDpU9O/m6qYEWY6yQ==}
-    dev: true
-
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
+    dev: true
+
+  /@sinclair/typebox@0.31.0:
+    resolution: {integrity: sha512-bL3KIy1cqi4wyKwJZ3szckq0k/IuLluwQ9IB8QMNS2ogHGiqkempV7uO52Tjr79oBgOnlRaOhIf5qkc8HH9KhA==}
     dev: true
 
   /@tailwindcss/aspect-ratio@0.4.2(tailwindcss@3.3.3):
@@ -3876,13 +3886,13 @@ packages:
       better-sqlite3: 8.5.0
     dev: true
 
-  /drizzle-typebox@0.1.0(@sinclair/typebox@0.27.8)(drizzle-orm@0.28.2):
+  /drizzle-typebox@0.1.0(@sinclair/typebox@0.31.0)(drizzle-orm@0.28.2):
     resolution: {integrity: sha512-VVBSh3s0l6SeoPItYQ0EOVlTRc6T+wHIXxXhug7zSqZZ4E1cpTYtJyZf558udkpaoq5VgkGzcujSH2rtifJgug==}
     peerDependencies:
       '@sinclair/typebox': '>=0.17.6'
       drizzle-orm: '>=0.23.13'
     dependencies:
-      '@sinclair/typebox': 0.27.8
+      '@sinclair/typebox': 0.31.0
       drizzle-orm: 0.28.2(@types/better-sqlite3@7.6.4)(better-sqlite3@8.5.0)
     dev: true
 
@@ -5010,16 +5020,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       duplexer: 0.1.2
-    dev: true
-
-  /h3-typebox@0.6.0:
-    resolution: {integrity: sha512-GFQwo043+8bQA4e0tHcc5DWwgS9r5wiGd4pEzOKdcTjRhAnJz/Ryfz1bjkRVbmqZVXaDuvUrPWWBxTVrfpfSzg==}
-    dependencies:
-      '@apideck/better-ajv-errors': 0.3.6(ajv@8.12.0)
-      '@sinclair/typebox': 0.25.24
-      ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
-      h3: 1.7.1
     dev: true
 
   /h3@1.7.1:

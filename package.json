@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "nuxzle",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -27,7 +27,7 @@
     "drizzle-kit": "^0.19.12",
     "drizzle-orm": "^0.28.2",
     "drizzle-typebox": "^0.1.0",
-    "h3-typebox": "^0.6.0",
+    "h3-typebox": "npm:@kmilogp8496/h3-typebox@^0.7.0",
     "jsonwebtoken": "^9.0.1",
     "nuxt": "^3.6.5"
   }

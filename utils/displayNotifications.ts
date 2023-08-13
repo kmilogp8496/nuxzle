@@ -31,3 +31,9 @@ export function displaySuccessNotification(options: Partial<Notification>) {
     color: 'green',
   })
 }
+
+export function displayErrorFromApi(error: ReturnType<typeof useFetch<'/api/products'>>['error']) {
+  displayErrorNotification({
+    description: error.value?.data.message ?? 'La operación no se pudo realizar',
+  })
+}
