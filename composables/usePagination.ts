@@ -1,15 +1,12 @@
-interface PaginationOptions {
-  limit?: number
-  page?: number
+const defaults = {
+  limit: 20,
+  page: 1,
 }
 
-export function usePagination(options: PaginationOptions = {}) {
-  const defaults: Required<PaginationOptions> = {
-    limit: 10,
-    page: 1,
-  }
-
-  const { limit, page } = toRefs(reactive({ ...defaults, ...options }))
+export function usePagination(options?: Partial<typeof defaults>) {
+  const { limit, page } = toRefs(reactive(
+    Object.assign({}, defaults, options),
+  ))
 
   const offset = computed(() => (page.value - 1) * limit.value)
 

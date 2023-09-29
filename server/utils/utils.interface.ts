@@ -1,3 +1,10 @@
 import type { useValidatedQuery } from 'h3-zod'
+import type { MaybeRef } from 'vue'
 
-export type QueryType<T extends Parameters<typeof useValidatedQuery>[1]> = Awaited<ReturnType<typeof useValidatedQuery<T>>>
+type ValidatedQueryParameters = Parameters<typeof useValidatedQuery>[1]
+
+export type Query<T extends ValidatedQueryParameters> = Awaited<ReturnType<typeof useValidatedQuery<T>>>
+
+export type QueryType<T extends ValidatedQueryParameters, Q = Query<T>> = {
+  [K in keyof Q]: MaybeRef<Q[K]>
+}

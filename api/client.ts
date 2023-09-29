@@ -9,3 +9,5 @@ export const apiClient: typeof useFetch = (request, options) => {
     ...options,
   })
 }
+
+export type FetchOptions = Required<Parameters<typeof useFetch>[1]>

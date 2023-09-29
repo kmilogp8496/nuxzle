@@ -1,5 +1,3 @@
-import type { Notification } from '@nuxthq/ui/dist/runtime/types'
-
 export function displayErrorNotification(options: Partial<Notification>) {
   const toast = useToast()
 

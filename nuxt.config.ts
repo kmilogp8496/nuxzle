@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     jwtSecret: '',
     authCookieName: '',
-    dbPath: resolve(process.env.NUXT_SQLITE_PATH ?? 'server/db'),
+    dbDir: resolve(process.env.NUXT_DB_DIR ?? ''),
   },
 
   vite: {
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxthq/ui',
+    '@nuxt/ui',
     '@pinia/nuxt',
     '@nuxtjs/eslint-module',
   ],

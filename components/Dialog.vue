@@ -1,6 +1,9 @@
 <script setup lang="ts">
+defineProps<{ title: string }>()
+
 const model = defineModel({
   default: false,
+  local: true,
 })
 
 function onClick() {
@@ -14,12 +17,14 @@ function onClick() {
   <UModal v-model="model">
     <UCard>
       <template #header>
-        <slot name="header" />
+        <slot name="title">
+          {{ title }}
+        </slot>
       </template>
 
       <slot />
       <template #footer>
-        <slot name="header" />
+        <slot name="actions" />
       </template>
     </UCard>
   </UModal>

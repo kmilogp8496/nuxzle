@@ -7,29 +7,31 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "migrations:check": "drizzle-kit check:sqlite",
     "migrations:push": "drizzle-kit push:sqlite",
     "migrations:make": "drizzle-kit generate:sqlite",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
-    "@nuxthq/ui": "^2.7.0",
+    "@libsql/client": "^0.3.5",
+    "@nuxt/ui": "^2.8.1",
     "@pinia/nuxt": "^0.4.11",
     "pinia": "^2.1.6"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.40.2",
+    "@antfu/eslint-config": "^0.43.1",
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-module": "^4.1.0",
-    "@types/better-sqlite3": "^7.6.4",
-    "@types/jsonwebtoken": "^9.0.2",
-    "@types/node": "^18.17.5",
-    "better-sqlite3": "^8.5.0",
-    "drizzle-kit": "^0.19.12",
-    "drizzle-orm": "^0.28.2",
-    "drizzle-zod": "^0.5.0",
+    "@types/better-sqlite3": "^7.6.5",
+    "@types/jsonwebtoken": "^9.0.3",
+    "@types/node": "^18.18.0",
+    "better-sqlite3": "^8.6.0",
+    "drizzle-kit": "^0.19.13",
+    "drizzle-orm": "^0.28.6",
+    "drizzle-zod": "^0.5.1",
     "h3-zod": "^0.5.1",
-    "jsonwebtoken": "^9.0.1",
-    "nuxt": "^3.6.5"
+    "jsonwebtoken": "^9.0.2",
+    "nuxt": "^3.7.4"
   }
 }

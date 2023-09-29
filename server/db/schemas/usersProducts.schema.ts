@@ -4,10 +4,11 @@ import {
   text,
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
-import type { InferModel } from 'drizzle-orm'
 import { sql } from 'drizzle-orm'
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
+import type { z } from 'zod'
 import { users } from './users.schema'
-import { products } from './products.schema'
+import { products } from './products/products.schema'
 
 export const userProduct = sqliteTable(
   'userProduct',
@@ -31,5 +32,9 @@ export const userProduct = sqliteTable(
   },
 )
 
-export type UserProduct = InferModel<typeof userProduct>
-export type InsertUserProduct = InferModel<typeof userProduct, 'insert'>
+export const insertProductSchema = createInsertSchema(products)
+
+export const selectProductSchema = createSelectSchema(products)
+
+export type UserProduct = z.infer<typeof selectProductSchema>
+export type InsertUserProduct = z.infer<typeof insertProductSchema>

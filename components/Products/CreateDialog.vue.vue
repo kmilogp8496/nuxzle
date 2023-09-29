@@ -1,33 +1,58 @@
 <script lang="ts" setup>
-const formData = ref({
+import type { UnwrapRef } from 'vue'
+
+const emit = defineEmits<{
+  (event: 'created'): void
+}>()
+
+const defaultData = {
   name: '',
+  market: '',
+}
+
+const formData = ref(defaultData)
+
+const model = defineModel({
+  default: false,
+  local: true,
 })
 
+const { error, execute } = createProduct(formData)
+
+const productMarkets = ['Carrefour', 'Mercadona', 'Lidl', 'Casa Elías', 'Alcampo', 'Dia'] as const
+
 async function onSubmit() {
-  const { error } = await createProduct(formData)
-  if (error)
+  await execute()
+  if (error.value) {
     displayErrorFromApi(error)
+    return
+  }
+
+  emit('created')
+  model.value = false
 }
 </script>
 
 <template>
-  <Dialog>
+  <FormDialog v-model="model" title="Crear producto" @submit="onSubmit">
     <template #activator="{ on }">
-      <UButton v-on="on">
+      <UButton v-bind="on">
         Crear producto
       </UButton>
     </template>
-    <Form title="Crear producto" class="space-y-8" @submit="onSubmit">
-      <FormInput
-        v-model="formData.name"
-        label="Nombre"
-        placeholder="Nombre"
-        :rules="required"
-      />
+
+    <FormInput
+      v-model="formData.name"
+      label="Nombre"
+      placeholder="Nombre"
+      :rules="required"
+    />
+
+    <template #actions>
       <UButton
         type="submit"
         label="Buscar"
       />
-    </Form>
-  </Dialog>
+    </template>
+  </FormDialog>
 </template>

@@ -11,7 +11,7 @@ async function tryLogout() {
 </script>
 
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="h-screen flex flex-col flex-grow">
     <UContainer class="w-full py-4 flex items-center gap-4">
       <UButton class="me-auto" icon="i-heroicons-home" variant="ghost" :to="{ name: 'index' }">
         Inicio

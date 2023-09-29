@@ -22,5 +22,5 @@ logs
 .env.*
 !.env.example
 
-sqlite.db
+db.sqlite
 server/db/db.sqlite
