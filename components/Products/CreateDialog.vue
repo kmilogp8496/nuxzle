@@ -6,6 +6,7 @@ const emit = defineEmits<{
 const defaultData = {
   name: '',
   market: 'Carrefour',
+  price: 0,
 } as const
 
 const formData = ref(defaultData)
@@ -16,8 +17,6 @@ const model = defineModel({
 })
 
 const { error, execute } = createProduct(formData)
-
-const productMarkets = ['Carrefour', 'Mercadona', 'Lidl', 'Casa Elías', 'Alcampo', 'Dia'] as const
 
 async function onSubmit() {
   await execute()
@@ -39,28 +38,18 @@ async function onSubmit() {
       </UButton>
     </template>
 
-    <FormInput
-      v-model="formData.name"
-      label="Nombre"
-      placeholder="Nombre"
-      :rules="required"
-    />
-
-    <FormSelect
-      v-model="formData.market"
-      label="Mercado"
-      placeholder="Mercado"
-      :rules="required"
-      :options="productMarkets"
-    />
+    <ProductsForm v-model="formData" />
 
     <template #actions>
       <UButton
         label="Cancelar"
+        variant="ghost"
+        @click="model = false"
       />
       <UButton
         type="submit"
         label="Crear"
+        icon="i-heroicons-plus"
       />
     </template>
   </FormDialog>

@@ -9,6 +9,7 @@ definePageMeta({
 const { limit, offset, page } = usePagination({ limit: 5 })
 
 const { data, execute, refresh } = getProducts({ limit, offset })
+const { $format } = useNuxtApp()
 
 execute()
 const columns = [
@@ -23,6 +24,15 @@ const columns = [
   {
     key: 'market',
     label: 'Mercado',
+  },
+  {
+    key: 'price',
+    label: 'Precio (€)',
+    transform: value => $format.asCents(value.price),
+  },
+  {
+    key: 'actions',
+    label: 'Acciones',
   },
 ] as TableColumn<Product>[]
 </script>
@@ -40,7 +50,13 @@ const columns = [
         Productos
       </h1>
 
-      <ProductsCreateDialogVue class="ml-auto" @created="refresh" />
+      <ProductsCreateDialog class="ml-auto" @created="refresh" />
+    </template>
+    <template #actions-data="{ row }">
+      <UButtonGroup>
+        <ProductsEditDialog :item="row" @success="refresh" />
+        <ProductsDeleteButton />
+      </UButtonGroup>
     </template>
   </Table>
 </template>

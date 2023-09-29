@@ -7,5 +7,8 @@ export default defineAppConfig({
         variant: 'soft',
       },
     },
+    formGroup: {
+      help: 'mt-2 text-gray-500 dark:text-gray-400 text-right',
+    },
   },
 })
