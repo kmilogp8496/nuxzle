@@ -21,6 +21,9 @@ const transformableColumns = computed(() => props.columns.filter(column => !!col
 </script>
 
 <template>
+  <div v-if="$slots.header" class="flex py-4 items-center">
+    <slot name="header" />
+  </div>
   <UTable :rows="rows" :columns="columns" :ui="{ wrapper: 'border rounded border-gray-300 dark:border-gray-700' }">
     <template v-for="column in transformableColumns" :key="`transformed-${column.key}`" #[`${column.key}-data`]="{ row }">
       {{ column.transform!(row) }}

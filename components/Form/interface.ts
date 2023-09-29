@@ -26,3 +26,9 @@ export interface FormItemProps extends FormGroupProps {
   placeholder?: string
   type?: string
 }
+
+export interface FormSelectProps<T = unknown> extends FormItemProps {
+  optionAttribute?: string
+  valueAttribute?: string
+  options: T[] | readonly T[]
+}

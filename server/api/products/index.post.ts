@@ -1,5 +1,5 @@
 import { useValidatedBody, z } from 'h3-zod'
-import { insertProduct } from '~/server/db/schemas/products/products.schema'
+import { insertProduct } from '~/server/db/schemas/products/products.functions'
 
 export default defineEventHandler(async (event) => {
   const user = protectRoute(event)

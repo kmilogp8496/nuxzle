@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
     id: products.id,
     name: products.name,
     created_at: products.created_at,
+    market: products.market,
   })
     .from(products)
     .limit(query.limit ?? 20)

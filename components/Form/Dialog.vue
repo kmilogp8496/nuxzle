@@ -27,9 +27,13 @@ function onClick() {
           </slot>
         </template>
 
-        <slot />
+        <div class="space-y-4">
+          <slot />
+        </div>
         <template #footer>
-          <slot name="actions" />
+          <div class="flex justify-end gap-4">
+            <slot name="actions" />
+          </div>
         </template>
       </UCard>
     </Form>

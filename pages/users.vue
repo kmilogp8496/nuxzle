@@ -53,8 +53,8 @@ async function onSubmit() {
     <UTable :rows="data ?? []" :columns="columns" class="rounded border border-gray-800">
       <template #actions-data>
         <UButtonGroup>
-          <UButton variant="soft" color="green" icon="i-heroicons-pencil" />
-          <UButton variant="soft" color="red" icon="i-heroicons-trash" />
+          <UButton color="green" icon="i-heroicons-pencil" />
+          <UButton color="red" icon="i-heroicons-trash" />
         </UButtonGroup>
       </template>
     </UTable>

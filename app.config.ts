@@ -2,6 +2,10 @@ export default defineAppConfig({
   ui: {
     primary: 'blue',
     gray: 'slate',
-    accent: 'pink',
+    button: {
+      default: {
+        variant: 'soft',
+      },
+    },
   },
 })

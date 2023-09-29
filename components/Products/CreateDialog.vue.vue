@@ -1,14 +1,12 @@
 <script lang="ts" setup>
-import type { UnwrapRef } from 'vue'
-
 const emit = defineEmits<{
   (event: 'created'): void
 }>()
 
 const defaultData = {
   name: '',
-  market: '',
-}
+  market: 'Carrefour',
+} as const
 
 const formData = ref(defaultData)
 
@@ -36,7 +34,7 @@ async function onSubmit() {
 <template>
   <FormDialog v-model="model" title="Crear producto" @submit="onSubmit">
     <template #activator="{ on }">
-      <UButton v-bind="on">
+      <UButton icon="i-heroicons-plus" color="green" v-bind="{ ...on, class: $attrs?.class ?? '' }">
         Crear producto
       </UButton>
     </template>
@@ -48,10 +46,21 @@ async function onSubmit() {
       :rules="required"
     />
 
+    <FormSelect
+      v-model="formData.market"
+      label="Mercado"
+      placeholder="Mercado"
+      :rules="required"
+      :options="productMarkets"
+    />
+
     <template #actions>
       <UButton
+        label="Cancelar"
+      />
+      <UButton
         type="submit"
-        label="Buscar"
+        label="Crear"
       />
     </template>
   </FormDialog>

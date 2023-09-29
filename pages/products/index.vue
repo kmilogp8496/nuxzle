@@ -28,15 +28,19 @@ const columns = [
 </script>
 
 <template>
-  <ProductsCreateDialogVue @created="refresh" />
-  <h1 class="text-2xl mt-10">
-    Productos
-  </h1>
   <Table
     v-model:limit="limit"
     v-model:page="page"
     :rows="data?.results ?? []"
     :columns="columns"
     :total="data?.total ?? 0"
-  />
+  >
+    <template #header>
+      <h1 class="text-2xl">
+        Productos
+      </h1>
+
+      <ProductsCreateDialogVue class="ml-auto" @created="refresh" />
+    </template>
+  </Table>
 </template>
