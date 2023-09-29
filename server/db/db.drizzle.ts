@@ -33,5 +33,5 @@ export function useDb() {
       throw new Error('No database configured for production')
     }
   }
-  return _db
+  return _db as BetterSQLite3Database
 }

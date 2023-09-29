@@ -2,7 +2,7 @@ import { like, sql } from 'drizzle-orm'
 import { useValidatedQuery, z, zh } from 'h3-zod'
 import type { QueryType } from '~/server/utils/utils.interface'
 import { products } from '~/server/db/schemas/products/products.schema'
-import { db } from '~/server/db/db.drizzle'
+import { useDb } from '~/server/db/db.drizzle'
 import { createPaginatedResponse } from '~/server/utils/response'
 
 const querySchema = z.object({
@@ -16,6 +16,11 @@ export type ProductQuery = QueryType<typeof querySchema>
 
 export default defineEventHandler(async (event) => {
   const query = await useValidatedQuery(event, querySchema)
+  const db = useDb()
+
+  db.select({
+
+  }).from(products)
 
   const resultsQb = db.select({
     id: products.id,

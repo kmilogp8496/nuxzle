@@ -8,7 +8,7 @@ import { sql } from 'drizzle-orm'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { SqliteError } from 'better-sqlite3'
 import { z } from 'zod'
-import { db } from '../db.drizzle'
+import { useDb } from '../db.drizzle'
 
 export const users = sqliteTable(
   'users',
@@ -48,7 +48,7 @@ export function insertUser(user: InsertUser) {
   }
 
   try {
-    const createdUser = db.insert(users).values(user).returning().get()
+    const createdUser = useDb().insert(users).values(user).returning().get()
     return createdUser
   }
   catch (error) {

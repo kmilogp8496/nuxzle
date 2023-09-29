@@ -2,12 +2,12 @@ import { eq } from 'drizzle-orm'
 import { generateToken } from '~/server/utils/jwt'
 import { setAuthCookie } from '~/server/utils/cookie'
 import { users } from '~/server/db/schemas/users.schema'
-import { db } from '~/server/db/db.drizzle'
+import { useDb } from '~/server/db/db.drizzle'
 
 export default defineEventHandler(async (event) => {
   const userToken = protectRoute(event)
 
-  const user = db.select().from(users).where(eq(users.id, userToken.id)).get()
+  const user = useDb().select().from(users).where(eq(users.id, userToken.id)).get()
 
   if (!user) {
     throw createError({

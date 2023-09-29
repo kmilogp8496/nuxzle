@@ -1,5 +1,5 @@
 import { SqliteError } from 'better-sqlite3'
-import { db } from '../../db.drizzle'
+import { useDb } from '../../db.drizzle'
 import type { InsertProduct } from './products.schema'
 import { insertProductSchema, products } from './products.schema'
 
@@ -13,7 +13,7 @@ export function insertProduct(product: InsertProduct) {
   }
 
   try {
-    return db.insert(products).values(product).returning().run()
+    return useDb().insert(products).values(product).returning().run()
   }
   catch (error) {
     if (error instanceof SqliteError) {

@@ -8,5 +8,4 @@ export default {
   driver: 'better-sqlite',
   breakpoints: true,
   out: './server/db/migrations',
-
 } satisfies Config

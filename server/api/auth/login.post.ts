@@ -2,7 +2,7 @@ import { and, eq } from 'drizzle-orm'
 import jwt from 'jsonwebtoken'
 import { useValidatedBody, z } from 'h3-zod'
 import { users } from '~/server/db/schemas/users.schema'
-import { db } from '~/server/db/db.drizzle'
+import { useDb } from '~/server/db/db.drizzle'
 
 export default defineEventHandler(async (event) => {
   const body = await useValidatedBody(event, z.object({
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     password: z.string().min(8),
   }))
 
-  const user = db.select().from(users).where(
+  const user = useDb().select().from(users).where(
     and(
       eq(users.email, body.email),
       eq(users.password, body.password),
