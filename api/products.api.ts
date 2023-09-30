@@ -1,4 +1,3 @@
-import { type } from 'node:os'
 import type { ProductQuery } from '~/server/api/products/index.get'
 import type { InsertProduct } from '~/server/db/schemas/products/products.schema'
 
