@@ -5,6 +5,10 @@ const props = defineProps<{
   item: Product
 }>()
 
+const emit = defineEmits<{
+  (event: 'success'): void
+}>()
+
 const { execute, error } = deleteProduct(props.item.id)
 async function onSuccess() {
   await execute()
@@ -12,6 +16,7 @@ async function onSuccess() {
     displayErrorFromApi(error)
     return false
   }
+  emit('success')
   return true
 }
 </script>

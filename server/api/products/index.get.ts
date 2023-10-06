@@ -28,6 +28,8 @@ export default defineEventHandler(async (event) => {
     created_at: products.created_at,
     market: products.market,
     price: products.price,
+    weight: products.weight,
+    unit: products.unit,
   })
     .from(products)
     .limit(query.limit ?? 20)

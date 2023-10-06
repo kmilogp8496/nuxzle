@@ -1,1 +1,0 @@
-export const Markets = ['Carrefour', 'Mercadona', 'Lidl', 'Casa Elías', 'Alcampo', 'Dia'] as const

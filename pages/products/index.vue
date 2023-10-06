@@ -6,6 +6,10 @@ definePageMeta({
   middleware: 'auth',
 })
 
+useHead({
+  title: 'Productos',
+})
+
 const { limit, offset, page } = usePagination({ limit: 5 })
 
 const { data, refresh, status } = getProducts({ limit, offset })
@@ -14,6 +18,7 @@ const columns = [
   {
     key: 'name',
     label: 'Nombre',
+    transform: value => `${value.name} (${value.market})`,
   },
   {
     key: 'price',
@@ -21,8 +26,9 @@ const columns = [
     transform: value => $format.asCents(value.price),
   },
   {
-    key: 'market',
-    label: 'Mercado',
+    key: 'weight',
+    label: 'Peso',
+    transform: value => `${value.weight} ${value.unit}`,
   },
   {
     key: 'created_at',
@@ -54,7 +60,7 @@ const columns = [
     <template #actions-data="{ row }">
       <UButtonGroup>
         <ProductsDialogEdit :item="row" @success="refresh" />
-        <ProductsDialogDelete :item="row" />
+        <ProductsDialogDelete :item="row" @success="refresh" />
       </UButtonGroup>
     </template>
   </Table>

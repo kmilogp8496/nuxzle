@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { InsertProduct } from '~/server/db/schemas/products/products.schema'
+
 const emit = defineEmits<{
   (event: 'created'): void
 }>()
@@ -7,9 +9,11 @@ const defaultData = {
   name: '',
   market: 'Carrefour',
   price: 0,
-} as const
+  unit: 'g',
+  weight: 0,
+} satisfies Omit<InsertProduct, 'created_by'>
 
-const formData = ref(defaultData)
+const formData = ref(structuredClone(defaultData))
 
 const model = defineModel({
   default: false,
@@ -28,6 +32,14 @@ async function onSubmit() {
   emit('created')
   model.value = false
 }
+
+watch(
+  () => model.value,
+  (value) => {
+    if (value)
+      formData.value = defaultData
+  },
+)
 </script>
 
 <template>

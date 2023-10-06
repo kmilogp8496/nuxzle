@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  titleTemplate: '%s - My App',
+  titleTemplate: '%s - Nuxzle',
 })
 </script>
 

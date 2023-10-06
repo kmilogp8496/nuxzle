@@ -1,7 +1,10 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Inicio',
   middleware: ['auth'],
+})
+
+useHead({
+  title: 'Perfil',
 })
 
 const authStore = useAuthStore()
