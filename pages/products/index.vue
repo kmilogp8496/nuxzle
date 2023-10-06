@@ -8,27 +8,25 @@ definePageMeta({
 
 const { limit, offset, page } = usePagination({ limit: 5 })
 
-const { data, execute, refresh } = getProducts({ limit, offset })
+const { data, refresh, status } = getProducts({ limit, offset })
 const { $format } = useNuxtApp()
-
-execute()
 const columns = [
   {
     key: 'name',
     label: 'Nombre',
   },
   {
-    key: 'created_at',
-    label: 'Fecha de creación',
+    key: 'price',
+    label: 'Precio (€)',
+    transform: value => $format.asCents(value.price),
   },
   {
     key: 'market',
     label: 'Mercado',
   },
   {
-    key: 'price',
-    label: 'Precio (€)',
-    transform: value => $format.asCents(value.price),
+    key: 'created_at',
+    label: 'Fecha de creación',
   },
   {
     key: 'actions',
@@ -44,18 +42,19 @@ const columns = [
     :rows="data?.results ?? []"
     :columns="columns"
     :total="data?.total ?? 0"
+    :loading="status === 'pending'"
   >
     <template #header>
       <h1 class="text-2xl">
         Productos
       </h1>
 
-      <ProductsCreateDialog class="ml-auto" @created="refresh" />
+      <ProductsDialogCreate class="ml-auto" @created="refresh" />
     </template>
     <template #actions-data="{ row }">
       <UButtonGroup>
-        <ProductsEditDialog :item="row" @success="refresh" />
-        <ProductsDeleteButton />
+        <ProductsDialogEdit :item="row" @success="refresh" />
+        <ProductsDialogDelete :item="row" />
       </UButtonGroup>
     </template>
   </Table>

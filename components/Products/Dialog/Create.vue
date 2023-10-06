@@ -16,7 +16,7 @@ const model = defineModel({
   local: true,
 })
 
-const { error, execute } = createProduct(formData)
+const { error, execute, status } = createProduct(formData)
 
 async function onSubmit() {
   await execute()
@@ -50,6 +50,7 @@ async function onSubmit() {
         type="submit"
         label="Crear"
         icon="i-heroicons-plus"
+        :loading="status === 'pending'"
       />
     </template>
   </FormDialog>

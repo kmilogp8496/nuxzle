@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import type { User } from './db/schemas/users.schema'
+import type { User } from '../db/schemas/users.schema'
 
 export type TokenUser = Omit<User, 'password'>
 

@@ -7,8 +7,8 @@ import { createPaginatedResponse } from '~/server/utils/response'
 
 const querySchema = z.object({
   created_by_me: zh.boolAsString.optional(),
-  limit: zh.numAsString.optional(),
-  offset: zh.numAsString.optional(),
+  limit: zh.intAsString.optional(),
+  offset: zh.intAsString.optional(),
   search: z.string().optional(),
 })
 

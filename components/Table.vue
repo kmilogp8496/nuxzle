@@ -5,6 +5,7 @@ const props = defineProps<{
   rows: T[]
   columns: TableColumn<T>[]
   total: number
+  loading?: boolean
 }>()
 
 const page = defineModel('page', {

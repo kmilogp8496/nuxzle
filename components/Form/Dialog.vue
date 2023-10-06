@@ -23,7 +23,9 @@ function onClick() {
       <UCard>
         <template #header>
           <slot name="title">
-            {{ title }}
+            <h4 class="text-2xl font-semibold">
+              {{ title }}
+            </h4>
           </slot>
         </template>
 

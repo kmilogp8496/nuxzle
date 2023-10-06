@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Inicio',
+  title: 'Perfil',
   middleware: ['auth'],
 })
 

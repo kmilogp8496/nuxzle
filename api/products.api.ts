@@ -21,9 +21,17 @@ export function createProduct(body: CreateProduct) {
 }
 
 export function editProduct(body: EditProduct) {
-  return apiClient('/api/products', {
+  return apiClient(`/api/products/${body.value.id}`, {
     method: 'PATCH',
     body,
+    watch: false,
+    immediate: false,
+  })
+}
+
+export function deleteProduct(productId: number) {
+  return apiClient(`/api/products/${productId}`, {
+    method: 'DELETE',
     watch: false,
     immediate: false,
   })

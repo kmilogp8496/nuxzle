@@ -29,8 +29,8 @@ export const products = sqliteTable(
 )
 
 export const insertProductSchema = createInsertSchema(products)
-
 export const selectProductSchema = createSelectSchema(products)
+export const updateProductSchema = insertProductSchema.pick({ market: true, price: true, name: true }).partial()
 
 export type InsertProduct = z.infer<typeof insertProductSchema>
 export type Product = z.infer<typeof selectProductSchema>

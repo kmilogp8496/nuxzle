@@ -1,3 +1,5 @@
+import type { Notification } from '@nuxt/ui/dist/runtime/types/notification'
+
 export function displayErrorNotification(options: Partial<Notification>) {
   const toast = useToast()
 

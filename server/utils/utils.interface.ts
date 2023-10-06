@@ -8,3 +8,5 @@ export type Query<T extends ValidatedQueryParameters> = Awaited<ReturnType<typeo
 export type QueryType<T extends ValidatedQueryParameters, Q = Query<T>> = {
   [K in keyof Q]: MaybeRef<Q[K]>
 }
+
+export type MaybePromise<T> = T | Promise<T>
