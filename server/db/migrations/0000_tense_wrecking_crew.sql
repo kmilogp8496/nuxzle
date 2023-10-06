@@ -3,6 +3,7 @@ CREATE TABLE `products` (
 	`name` text(256) NOT NULL,
 	`created_by` integer NOT NULL,
 	`market` text DEFAULT 'Mercadona' NOT NULL,
+	`price` integer DEFAULT 0 NOT NULL,
 	`created_at` text(30) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
@@ -11,6 +12,9 @@ CREATE TABLE `users` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text(256),
 	`email` text(256) NOT NULL,
+	`phone` text(256),
+	`address` text(256),
+	`default_market` text,
 	`password` text(256) NOT NULL,
 	`created_at` text(256) DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

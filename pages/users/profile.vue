@@ -8,9 +8,9 @@ const authStore = useAuthStore()
 </script>
 
 <template>
-  <img class="rounded-full mx-auto max-w-80 max-h-80 object-cover mt-20" src="https://images.unsplash.com/photo-1488161628813-04466f872be2" alt="Avatar" height="320" width="320">
+  <img class="rounded-full mx-auto max-w-80 max-h-80 object-cover mt-8" src="https://images.unsplash.com/photo-1488161628813-04466f872be2" alt="Avatar" height="320" width="320">
 
-  <div class="overflow-hidden mt-20 border rounded-xl max-w-lg mx-auto">
+  <div class="overflow-hidden mt-8 border rounded-xl max-w-lg mx-auto">
     <div class="p-4 flex gap-4 items-center">
       <h3 class="text-xl font-semibold">
         Email:

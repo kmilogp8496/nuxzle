@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1695998527257,
-      "tag": "0000_ancient_clea",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1696007963368,
-      "tag": "0001_large_angel",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1696605834768,
-      "tag": "0002_absurd_shadow_king",
+      "when": 1696613251582,
+      "tag": "0000_tense_wrecking_crew",
       "breakpoints": true
     }
   ]

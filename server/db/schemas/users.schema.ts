@@ -17,7 +17,7 @@ export const users = sqliteTable(
     id: integer('id').primaryKey({ autoIncrement: true }),
     name: text('name', { length: 256 }),
     email: text('email', { length: 256 }).notNull(),
-    phone: text('phone', { length: 20 }).notNull(),
+    phone: text('phone', { length: 256 }),
     address: text('address', { length: 256 }),
     default_market: text('default_market', { enum: Markets }),
     password: text('password', { length: 256 }).notNull(),
