@@ -1,26 +1,21 @@
 import { like, sql } from 'drizzle-orm'
-import { useValidatedQuery, z, zh } from 'h3-zod'
-import type { QueryType } from '~/server/utils/utils.interface'
+import { z } from 'zod'
 import { products } from '~/server/db/schemas/products/products.schema'
 import { useDb } from '~/server/db/db.drizzle'
 import { createPaginatedResponse } from '~/server/utils/response'
+import type { QueryType } from '~/server/utils/utils.interface'
+import { paginationQuerySchema } from '~/server/utils/query.ts'
 
 const querySchema = z.object({
-  created_by_me: zh.boolAsString.optional(),
-  limit: zh.intAsString.optional(),
-  offset: zh.intAsString.optional(),
+  created_by_me: z.string().optional().transform(value => value === 'true' ? true : undefined),
   search: z.string().optional(),
-})
+}).merge(paginationQuerySchema)
 
 export type ProductQuery = QueryType<typeof querySchema>
 
 export default defineEventHandler(async (event) => {
-  const query = await useValidatedQuery(event, querySchema)
+  const query = await getValidatedQuery(event, querySchema.parse)
   const db = useDb()
-
-  db.select({
-
-  }).from(products)
 
   const resultsQb = db.select({
     id: products.id,
@@ -32,8 +27,8 @@ export default defineEventHandler(async (event) => {
     unit: products.unit,
   })
     .from(products)
-    .limit(query.limit ?? 20)
-    .offset(query.offset ?? 0)
+    .limit(query.limit)
+    .offset(query.offset)
 
   const totalQb = db.select({ total: sql<number>`count(*)` }).from(products)
 

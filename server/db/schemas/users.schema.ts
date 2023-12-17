@@ -9,7 +9,6 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { SqliteError } from 'better-sqlite3'
 import { z } from 'zod'
 import { useDb } from '../db.drizzle'
-import { ProductMarkets } from './products/products.schema'
 
 export const users = sqliteTable(
   'users',
@@ -19,11 +18,12 @@ export const users = sqliteTable(
     email: text('email', { length: 256 }).notNull(),
     phone: text('phone', { length: 256 }),
     address: text('address', { length: 256 }),
-    default_market: text('default_market', { enum: ProductMarkets }),
+    default_market: text('default_market', { enum: ['Carrefour', 'Mercadona', 'Lidl', 'Casa Elías', 'Alcampo', 'Dia'] }),
     password: text('password', { length: 256 }).notNull(),
     created_at: text('created_at', { length: 256 })
       .notNull()
       .default(sql`CURRENT_TIMESTAMP`),
+    socialLogin: integer('social_login').notNull().default(0),
   },
   (users) => {
     return {

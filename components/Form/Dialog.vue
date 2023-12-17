@@ -1,8 +1,17 @@
-<script setup lang="ts">
-defineProps<{ title: string; modelValue?: boolean }>()
+<script setup lang="ts" generic="T extends ZodRawShape, K extends Zod.ZodObject<T>">
+import type { ZodRawShape, z } from 'zod'
+import UForm from '#ui/components/forms/Form.vue'
+import type { FormSubmitEvent } from '#ui/types'
+
+defineProps<{
+  title: string
+  modelValue?: boolean
+  schema?: K
+  state: InstanceType<typeof UForm>['$props']['state']
+}>()
 
 const emit = defineEmits<{
-  (event: 'submit'): void
+  (event: 'submit', payload: FormSubmitEvent<z.output<K>>): void
 }>()
 
 const model = defineModel({
@@ -19,7 +28,7 @@ function onClick() {
   <slot name="activator" :on="{ onClick }" />
 
   <UModal v-model="model">
-    <Form @submit="emit('submit')">
+    <UForm v-bind="{ state, schema }" @submit="emit('submit', $event)">
       <UCard>
         <template #header>
           <slot name="title">
@@ -38,6 +47,6 @@ function onClick() {
           </div>
         </template>
       </UCard>
-    </Form>
+    </UForm>
   </UModal>
 </template>

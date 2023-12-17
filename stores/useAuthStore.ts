@@ -1,17 +1,19 @@
-import type { TokenUser } from '~/server/utils/jwt'
+import type { SessionUser } from '~/server/utils/utils.interface'
 
 // Since hydration has some issues yet, the return object must not contain a computed or readonly object.
 // The return data must be the same as declared
 export const useAuthStore = defineStore('authStore', () => {
-  const loggedUser = ref<TokenUser | null>(null)
+  const loggedUser = ref<SessionUser | null>(null)
 
   async function getUserData() {
-    const { data, error } = await apiClient('/api/auth/user-data')
-    if (error.value)
+    const session = useUserSession()
+    await session.fetch()
+
+    if (!session.user)
       loggedUser.value = null
 
-    else if (data.value)
-      loggedUser.value = data.value
+    else
+      loggedUser.value = session.user.value
   }
 
   const isLogged = computed(() => {

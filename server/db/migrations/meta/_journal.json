@@ -15,6 +15,13 @@
       "when": 1696615691300,
       "tag": "0001_hesitant_slayback",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1702828483500,
+      "tag": "0002_careless_magma",
+      "breakpoints": true
     }
   ]
 }

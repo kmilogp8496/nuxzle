@@ -20,7 +20,7 @@ export const products = sqliteTable(
     id: integer('id').primaryKey(),
     name: text('name', { length: 256 }).notNull(),
     created_by: integer('created_by').notNull().references(() => users.id),
-    market: text('market', { enum: ProductMarkets }).notNull().default('Mercadona'),
+    market: text('market', { enum: ['Carrefour', 'Mercadona', 'Lidl', 'Casa Elías', 'Alcampo', 'Dia'] }).notNull().default('Mercadona'),
     price: integer('price').notNull().default(0),
     weight: integer('weight').notNull().default(0),
     unit: text('unit', { enum: ProductUnits }).notNull().default('g'),

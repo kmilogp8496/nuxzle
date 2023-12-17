@@ -13,58 +13,56 @@ const formData = defineModel<UnwrapRef<CreateProduct> | Product>({
   } satisfies Omit<InsertProduct, 'created_by'> & UpdateProduct,
   local: true,
 })
-
-const productUnits: readonly ProductUnit[] = ['g', 'kg', 'L', 'mL'] as const
 </script>
 
 <script lang="ts">
-export const productMarkets: readonly ProductMarket[] = ['Carrefour', 'Mercadona', 'Lidl', 'Alcampo', 'Dia', 'Casa Elías'] as const
+export const productUnits: ProductUnit[] = ['g', 'kg', 'L', 'mL'] as const
+export const productMarkets: ProductMarket[] = ['Carrefour', 'Mercadona', 'Lidl', 'Alcampo', 'Dia', 'Casa Elías'] as const
 </script>
 
 <template>
-  <FormInput
-    v-model="formData.name"
-    label="Nombre"
-    placeholder="Nombre"
-    :rules="required"
-  />
+  <UFormGroup label="Nombre" name="name">
+    <UInput
+      v-model="formData.name"
+      placeholder="Nombre"
+    />
+  </UFormGroup>
 
-  <FormSelect
-    v-model="formData.market"
-    label="Mercado"
-    placeholder="Mercado"
-    :rules="required"
-    :options="productMarkets"
-  />
+  <UFormGroup label="Mercado" name="market">
+    <USelect
+      v-model="formData.market"
+      placeholder="Mercado"
+      :options="productMarkets"
+    />
+  </UFormGroup>
 
   <div class="flex items-center gap-4">
-    <FormInput
-      v-model.number="formData.weight"
-      type="number"
-      :label="`Peso (${formData.unit})`"
-      :placeholder="`Peso (${formData.unit})`"
-      :rules="required"
-      class="w-full"
-    />
+    <UFormGroup class="w-full" :label="`Peso (${formData.unit})`" name="weight">
+      <UInput
+        v-model.number="formData.weight"
+        type="number"
+        :placeholder="`Peso (${formData.unit})`"
+      />
+    </UFormGroup>
 
-    <FormSelect
-      v-model="formData.unit"
-      class="w-full"
-      label="Unidad"
-      placeholder="Unidad"
-      :rules="required"
-      :options="productUnits"
-    />
+    <UFormGroup label="Unidad" name="unit">
+      <USelect
+        v-model="formData.unit"
+        class="w-full"
+        placeholder="Unidad"
+        :options="productUnits"
+      />
+    </UFormGroup>
   </div>
 
-  <FormInput
-    v-model.number="formData.price"
-    type="number"
-    label="Precio"
-    step="0.01"
-    :help="$format.asCurrency(formData.price ?? 0)"
-    placeholder="Precio (€)"
-    :rules="required"
-    trailing-icon="i-heroicons-currency-euro"
-  />
+  <UFormGroup label="Precio" name="price">
+    <UInput
+      v-model.number="formData.price"
+      type="number"
+      step="0.01"
+      :help="$format.asCurrency(formData.price ?? 0)"
+      placeholder="Precio (€)"
+      trailing-icon="i-heroicons-currency-euro"
+    />
+  </UFormGroup>
 </template>

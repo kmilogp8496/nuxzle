@@ -1,23 +1,41 @@
-import { eq } from 'drizzle-orm'
-import { useValidatedBody, z } from 'h3-zod'
-import { productNotFoundError } from './utils'
+import { and, eq } from 'drizzle-orm'
+import { z } from 'zod'
 import { useDb } from '~/server/db/db.drizzle'
-import { insertProductSchema, products, updateProductSchema } from '~/server/db/schemas/products/products.schema'
+import { products, updateProductSchema } from '~/server/db/schemas/products/products.schema'
+import type { SessionUser } from '~/server/utils/utils.interface'
 
 export default defineEventHandler(async (event) => {
-  const user = protectRoute(event)
-  const body = await readValidatedBody(event, updateProductSchema.parse)
+  const userSession = (await requireUserSession(event)).user as SessionUser
+  let id: number
 
-  const id = z.number().min(1).parse(Number(getRouterParam(event, 'id')))
+  try {
+    id = z.number().min(1).parse(Number(getRouterParam(event, 'id')))
+  }
+  catch {
+    throw createError({
+      statusCode: 400,
+      message: 'Invalid ID',
+    })
+  }
+
+  const body = await readValidatedBody(event, updateProductSchema.parse)
 
   const db = useDb()
 
   const [product] = await db.select().from(products)
-    .where(eq(products.id, id))
-    .where(eq(products.created_by, user.id))
+    .where(
+      and(
+        eq(products.id, id),
+        eq(products.created_by, userSession.id),
+      ),
+    )
 
-  if (!product)
-    return productNotFoundError()
+  if (!product) {
+    throw createError({
+      statusCode: 404,
+      message: 'Product not found',
+    })
+  }
 
   if (updateProductSchema.parse(body))
     return db.update(products).set(body).where(eq(products.id, id)).returning()

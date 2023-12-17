@@ -1,12 +1,13 @@
-import type { useValidatedQuery } from 'h3-zod'
 import type { MaybeRef } from 'vue'
-
-type ValidatedQueryParameters = Parameters<typeof useValidatedQuery>[1]
-
-export type Query<T extends ValidatedQueryParameters> = Awaited<ReturnType<typeof useValidatedQuery<T>>>
-
-export type QueryType<T extends ValidatedQueryParameters, Q = Query<T>> = {
-  [K in keyof Q]: MaybeRef<Q[K]>
-}
+import type { ZodObject, ZodRawShape } from 'zod'
+import type { User } from '../db/schemas/users.schema'
 
 export type MaybePromise<T> = T | Promise<T>
+
+export type MaybeRefObject<T> = {
+  [K in keyof T]: MaybeRef<T[K]>
+}
+
+export type QueryType<T extends ZodObject<ZodRawShape>> = Partial<MaybeRefObject<ReturnType<T['parse']>>>
+
+export type SessionUser = Omit<User, 'password'>

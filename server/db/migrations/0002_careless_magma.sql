@@ -1,0 +1,1 @@
+ALTER TABLE users ADD `social_login` integer DEFAULT 0 NOT NULL;

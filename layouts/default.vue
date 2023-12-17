@@ -53,10 +53,10 @@ const isDark = computed({
       </template>
     </ClientOnly>
     <template v-if="!authStore.isLogged">
-      <UButton icon="i-heroicons-arrow-right-on-rectangle" variant="ghost" :to="{ name: 'auth-register' }">
+      <UButton icon="i-heroicons-arrow-right-on-rectangle" variant="ghost" to="/auth/google">
         Registrarse
       </UButton>
-      <UButton icon="i-heroicons-user" :to="{ name: 'auth-login' }">
+      <UButton icon="i-heroicons-user" to="/auth/google">
         Iniciar sesión
       </UButton>
     </template>
