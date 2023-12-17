@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { productMarkets } from '~/components/Products/Form.vue'
+
 definePageMeta({
   middleware: ['auth'],
 })
@@ -8,6 +10,25 @@ useHead({
 })
 
 const authStore = useAuthStore()
+
+const user = ref(toRaw(authStore.user!))
+
+const { execute, error, data } = updateUser(user)
+
+async function onSaveUser() {
+  await execute()
+  if (error.value) {
+    displayErrorFromApi(error.value)
+    return
+  }
+
+  authStore.user = data.value
+
+  useToast().add({
+    title: 'Perfil actualizado',
+    description: 'Tu perfil ha sido actualizado correctamente',
+  })
+}
 </script>
 
 <template>
@@ -15,21 +36,21 @@ const authStore = useAuthStore()
 
   <div class="overflow-hidden mt-8 border rounded-xl max-w-lg mx-auto">
     <div class="p-4 flex gap-4 items-center">
-      <h3 class="text-xl font-semibold">
+      <h3 class="text-xl font-semibold mr-4">
         Email:
-      </h3> {{ authStore.user?.email }}
+      </h3>  {{ user.email }}
     </div>
     <hr>
     <div class="p-4 flex gap-4 items-center">
       <h3 class="text-xl font-semibold">
         Nombre:
-      </h3> {{ authStore.user?.name ?? 'Por definir' }}
+      </h3> <UInput v-model="user.name" variant="none" size="xl" placeholder="Por definir" />
     </div>
     <hr>
     <div class="p-4 flex gap-4 items-center">
       <h3 class="text-xl font-semibold">
         Teléfono:
-      </h3> {{ authStore.user?.phone ?? 'Por definir' }}
+      </h3> <UInput v-model="user.phone" variant="none" size="xl" type="tel" placeholder="Por definir" />
     </div>
   </div>
 
@@ -37,13 +58,19 @@ const authStore = useAuthStore()
     <div class="p-4 flex gap-4 items-center">
       <h3 class="text-xl font-semibold">
         Mercado preferido:
-      </h3> {{ authStore.user?.default_market ?? 'Por definir' }}
+      </h3>  <USelect v-model="user.default_market" :options="productMarkets" variant="none" size="xl" placeholder="Por definir" />
     </div>
     <hr>
     <div class="p-4 flex gap-4 items-center">
       <h3 class="text-xl font-semibold">
         Dirección:
-      </h3> {{ authStore.user?.address ?? 'Por definir' }}
+      </h3> <UInput v-model="user.address" variant="none" size="xl" placeholder="Por definir" />
     </div>
+  </div>
+
+  <div class="flex justify-end">
+    <UButton size="xl" @click="onSaveUser">
+      Guardar
+    </UButton>
   </div>
 </template>

@@ -6,7 +6,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const loggedUser = ref<TokenUser | null>(null)
 
   async function getUserData() {
-    const { data, error } = await apiClient('/api/auth/userData')
+    const { data, error } = await apiClient('/api/auth/user-data')
     if (error.value)
       loggedUser.value = null
 

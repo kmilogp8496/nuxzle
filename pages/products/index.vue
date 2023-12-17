@@ -23,7 +23,7 @@ const columns = [
   {
     key: 'price',
     label: 'Precio (€)',
-    transform: value => $format.asCents(value.price),
+    transform: value => $format.asCurrency(value.price),
   },
   {
     key: 'weight',

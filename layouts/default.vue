@@ -23,6 +23,16 @@ async function tryLogout() {
   navigateTo('/')
   logoutLoading.value = false
 }
+
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  },
+})
 </script>
 
 <template>
@@ -30,6 +40,18 @@ async function tryLogout() {
     <UButton class="me-auto" icon="i-heroicons-home" variant="ghost" :to="{ name: 'index' }">
       Inicio
     </UButton>
+    <ClientOnly>
+      <UButton
+        :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+        color="gray"
+        variant="ghost"
+        aria-label="Theme"
+        @click="isDark = !isDark"
+      />
+      <template #fallback>
+        <div class="w-8 h-8" />
+      </template>
+    </ClientOnly>
     <template v-if="!authStore.isLogged">
       <UButton icon="i-heroicons-arrow-right-on-rectangle" variant="ghost" :to="{ name: 'auth-register' }">
         Registrarse
@@ -42,9 +64,8 @@ async function tryLogout() {
       Cerrar sesión
     </UButton>
   </UContainer>
-  <UContainer :ui="{ constrained: false }" class="flex min-h-screen max-w-[1400px] gap-4">
+  <UContainer :ui="{ constrained: false }" class="flex max-w-[1400px] gap-4">
     <UVerticalNavigation :links="links" class="pt-20" />
-
     <div class="flex flex-col flex-grow">
       <div class="flex-grow overflow-y-auto w-full">
         <slot />
@@ -52,3 +73,9 @@ async function tryLogout() {
     </div>
   </UContainer>
 </template>
+
+<style>
+html, body {
+  height: 100%;
+}
+</style>

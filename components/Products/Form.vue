@@ -14,8 +14,11 @@ const formData = defineModel<UnwrapRef<CreateProduct> | Product>({
   local: true,
 })
 
-const productMarkets: readonly ProductMarket[] = ['Carrefour', 'Mercadona', 'Lidl', 'Alcampo', 'Dia', 'Casa Elías'] as const
 const productUnits: readonly ProductUnit[] = ['g', 'kg', 'L', 'mL'] as const
+</script>
+
+<script lang="ts">
+export const productMarkets: readonly ProductMarket[] = ['Carrefour', 'Mercadona', 'Lidl', 'Alcampo', 'Dia', 'Casa Elías'] as const
 </script>
 
 <template>
@@ -58,7 +61,8 @@ const productUnits: readonly ProductUnit[] = ['g', 'kg', 'L', 'mL'] as const
     v-model.number="formData.price"
     type="number"
     label="Precio"
-    :help="$format.asCents(formData.price ?? 0)"
+    step="0.01"
+    :help="$format.asCurrency(formData.price ?? 0)"
     placeholder="Precio (€)"
     :rules="required"
     trailing-icon="i-heroicons-currency-euro"

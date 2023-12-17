@@ -36,10 +36,12 @@ export const users = sqliteTable(
 const insertUserSchema = createInsertSchema(users, {
   password: z.string().min(8),
 })
+export const updateUserSchema = insertUserSchema.omit({ created_at: true, email: true, id: true, password: true }).partial()
 
 const selectUserSchema = createSelectSchema(users)
 
 export type InsertUser = z.infer<typeof insertUserSchema>
+export type UpdateUser = z.infer<typeof updateUserSchema>
 export type User = z.infer<typeof selectUserSchema>
 
 export function insertUser(user: InsertUser) {

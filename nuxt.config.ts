@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     jwtSecret: '',
     authCookieName: '',
-    dbDir: resolve(process.env.NUXT_DB_DIR ?? ''),
+    dbDir: resolve(process.env.NUXT_DB_DIR ?? 'server/db'),
   },
 
   vite: {
@@ -46,5 +46,5 @@ export default defineNuxtConfig({
     autoImports: [
       'defineStore',
     ],
-  }, 
+  },
 })

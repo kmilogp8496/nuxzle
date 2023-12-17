@@ -1,4 +1,4 @@
-import type { InsertUser } from '~/server/db/schemas/users.schema'
+import type { InsertUser, UpdateUser } from '~/server/db/schemas/users.schema'
 
 interface LoginData {
   email: string
@@ -17,6 +17,15 @@ export function registerUser(body: Ref<InsertUser>) {
 export function loginUser(body: Ref<LoginData>) {
   return apiClient('/api/auth/login', {
     method: 'POST',
+    body,
+    watch: false,
+    immediate: false,
+  })
+}
+
+export function updateUser(body: MaybeRef<UpdateUser>) {
+  return apiClient('/api/auth/user-data', {
+    method: 'PATCH',
     body,
     watch: false,
     immediate: false,

@@ -13,7 +13,7 @@ const modelValue = defineModel({
     <template #default="{ on }">
       <UInput
         v-model="modelValue"
-        v-bind="{ placeholder, trailingIcon, type, on }"
+        v-bind="{ placeholder, trailingIcon, type, on, step }"
         v-on="on"
       />
     </template>

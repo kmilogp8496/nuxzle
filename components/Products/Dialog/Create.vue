@@ -7,7 +7,7 @@ const emit = defineEmits<{
 
 const defaultData = {
   name: '',
-  market: 'Carrefour',
+  market: useAuthStore().user?.default_market ?? 'Carrefour',
   price: 0,
   unit: 'g',
   weight: 0,
@@ -37,7 +37,7 @@ watch(
   () => model.value,
   (value) => {
     if (value)
-      formData.value = defaultData
+      formData.value = JSON.parse(JSON.stringify(defaultData))
   },
 )
 </script>

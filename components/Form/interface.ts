@@ -25,6 +25,7 @@ export interface FormItemProps extends FormGroupProps {
   trailingIcon?: string
   placeholder?: string
   type?: string
+  step?: string
 }
 
 export interface FormSelectProps<T = unknown> extends FormItemProps {
